@@ -31,7 +31,7 @@ LDFLAGS = -L $(TOOLDIR)/lib \
 		  -L $(TOOLDIR)/lib/gcc/arm-thumb-eabi/4.4.1/thumb \
 		  -L $(ARMLIB) \
 		  --script $(ARMLIB)/arm-gba.ld
-LDDEBUG  = -L $(TOOLDIR)/lib -lgbaio
+#LDDEBUG  = -L $(TOOLDIR)/lib -lgbaio
 CDEBUG   = -g -DDEBUG
 CRELEASE = -O2
 CC       = $(TOOLDIR)/bin/arm-thumb-eabi-gcc
@@ -56,7 +56,8 @@ $(PROGNAME).gba : $(PROGNAME).elf
 	@$(OBJCOPY) -O binary $(PROGNAME).elf $(PROGNAME).gba
 
 $(PROGNAME).elf : crt0.o $(OFILES)
-	@$(LD) $(LDFLAGS) -o $(PROGNAME).elf $^ -lgcc -lc -lgcc $(LDDEBUG)
+	#@$(LD) $(LDFLAGS) -o $(PROGNAME).elf $^ -lgcc -lc -lgcc $(LDDEBUG)
+	@$(LD) $(LDFLAGS) -o $(PROGNAME).elf $^ -lgcc -lc -lgcc
 	@rm -f *.d
 
 crt0.o : $(ARMLIB)/crt0.s
